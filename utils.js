@@ -84,7 +84,7 @@ class UtilFunctions {
         function reqListener() {
             if (this.status != 200) {
                 console.log("ERROR!");
-                console.lof(this.responseText);
+                console.log(this.responseText);
                 return;
             }
             console.log("RECIVED!")
@@ -169,7 +169,7 @@ class UtilFunctions {
         function reqListener() {
             if (this.status != 200) {
                 console.log("ERROR!");
-                console.lof(this.responseText);
+                console.log(this.responseText);
                 return;
             }
             console.log("RECIVED!");
@@ -197,7 +197,7 @@ class UtilFunctions {
         function reqListener() {
             if (this.status != 200) {
                 console.log("ERROR!");
-                console.lof(this.responseText);
+                console.log(this.responseText);
                 return;
             }
             console.log("RECIVED!");
