@@ -108,6 +108,7 @@ class UtilFunctions {
         let id2 = element2.id;
         let flag = false;
         let found = false;
+        let ovr = false;
         combinations.forEach(function(v) {
             if (v.ElementID1 == id1 && v.ElementID2 == id2) {
                 found = true;
@@ -116,6 +117,8 @@ class UtilFunctions {
                     if (element.votes >= 10) {
                         callback(element);
                         return;
+                    }else if(element.votes <= -5) {
+                        ovr = true;
                     } else {;
                         voteGui.element = element;
                         voteGui.visible = true;
@@ -128,7 +131,9 @@ class UtilFunctions {
                     if (element.votes >= 10) {
                         callback(element);
                         return;
-                    } else {
+                    }else if(element.votes <= -5) {
+                        ovr = true;
+                    } else {;
                         voteGui.element = element;
                         voteGui.visible = true;
                     }
@@ -137,12 +142,13 @@ class UtilFunctions {
                 flag = true;
             }
         });
-        if (flag && !found) {
+        if ((flag && !found) || ovr) {
             createGui.selected = 13;
             createGui.name = "";
             createGui.visible = true;
             createGui.element1 = element1;
             createGui.element2 = element2;
+            if (ovr) createGui.flag = true; else createGui.flag = false;
         }
     }
 
@@ -151,7 +157,7 @@ class UtilFunctions {
     Will call callback() for additional code to be run
 */
 
-    static createElement(name, color, textColor, id1, id2, callback) {
+    static createElement(name, color, textColor, id1, id2, flag, callback) {
         console.log("SENDING POST REQUEST");
         const url = "http://127.0.0.1:10000";
         let http = new XMLHttpRequest();
@@ -163,6 +169,7 @@ class UtilFunctions {
             "id1": id1,
             "id2": id2
         }
+        if (flag) data.type = "update";
         http.addEventListener("load", reqListener);
         http.open("POST", url, true);
         http.send(JSON.stringify(data));
