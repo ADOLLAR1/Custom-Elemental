@@ -1,0 +1,11 @@
+DROP DATABASE IF EXISTS ElementsGame;
+CREATE DATABASE ElementsGame;
+Use ElementsGame;
+
+CREATE TABLE Elements (ID int NOT NULL AUTO_INCREMENT, Name varcar(255) NOT NULL, Color int(2) NOT NULL, TextColor int(2) NOT NULL, Unlocked int(1) NOT NULL DEFAULT 0, Votes int(2) NOT NULL DEFAULT 0, Timestamp timestamp NOT NULL DEFAULT CURRECT_TIMESTAMP, PRIMATY KEY(ID));
+CREATE TABLE Combinations (ID int NOT NULL AUTO_INCREMENT, ElementID1 int NOT NULL, ElementID2 int NOT NULL, ElementID3 int NOT NULL, PRIMARY KEY(ID));
+
+INSERT INTO (Name, Color, TextColor, Unlocked, Votes) Values('Air', 11, 10, 1, 11);
+INSERT INTO (Name, Color, TextColor, Unlocked, Votes) Values('Water', 5, 10, 1, 11);
+INSERT INTO (Name, Color, TextColor, Unlocked, Votes) Values('Earth', 12, 11, 1, 11);
+INSERT INTO (Name, Color, TextColor, Unlocked, Votes) Values('Fire', 1, 10, 1, 11);
