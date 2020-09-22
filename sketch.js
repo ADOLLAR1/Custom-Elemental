@@ -121,7 +121,7 @@ function mousePressed() {
             return;
         }
         if (UtilFunctions.isTouching(createVector(400,750), createVector(400,50), createVector(mouseX, mouseY))) {
-            UtilFunctions.createElement(createGui.name, createGui.selected, colors.colorToInt(colors.getTextColor(colors.intToColor(createGui.selected))), createGui.element1.id, createGui.element2.id, function() {
+            UtilFunctions.createElement(createGui.name, createGui.selected, colors.colorToInt(colors.getTextColor(colors.intToColor(createGui.selected))), createGui.element1.id, createGui.element2.id, createGui.flag, function() {
                 UtilFunctions.updateElementsTable(elements, function(newElements, newCombinations) {
                     elements = newElements;
                     combinations = newCombinations;

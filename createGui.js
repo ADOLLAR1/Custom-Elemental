@@ -24,6 +24,7 @@ class CreateGui {
         let element2;
         let selected = 13;
         let element;
+        let flag = false;
     }
 
     draw() {

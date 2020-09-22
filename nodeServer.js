@@ -105,6 +105,33 @@ let server = http.createServer(function (req, res) {
                     }
                 });
 
+            } else if(data.type === "update") {
+                connection.query("USE ElementsGame;", function(err, result, fields) {if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }});
+                let count=0;
+                connection.query("SELECT COUNT(Name) AS Count FROM Elements WHERE Name='" + data.name + "';", function(err, result, fields){
+                    if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
+                    count = result[0].Count;
+                });
+                if (count == 0) {
+                    let id;
+                    let combId;
+                    connection.query("SELECT ElementID3,ID FROM Combinations Where ElementID1=" + data.id1 + " AND ElementID2=" + data.id2 + ";", function(err, result, fields){
+                        if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
+                        id = result[0].ElementID3;
+                        combId = result[0].ID;
+                        connection.query("UPDATE Elements SET Name='" + data.name + "' Color='" + data.color + "' TextColor='" + data.textColor + "' Timestamp=CURRENT_TIMESTAMP WHERE ID=" + id + ";", function(err, result, fields){
+                            if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
+                            connection.query("UPDATE Combinations SET ElementID1=" + data.id1 + " ElementID2=" + data.id2 + " ElementID3=" + id + " WHERE ID=" + combId + ";", function(err, result, fields){
+                                if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
+                                res.writeHead(200, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
+                                Readable.from(["OK"]).pipe(res);
+                            });
+                        });
+                    });
+                } else {
+                    res.writeHead(409, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
+                    Readable.from(["Name already exists!"]).pipe(res);
+                }
             } else {
                 res.writeHead(400, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
                 Readable.from(["NO TYPE FOUND! Please make sure there is a type in the JSON object!"]).pipe(res);
