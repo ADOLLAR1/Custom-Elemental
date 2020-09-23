@@ -26,7 +26,16 @@ let createGui;
 let voteGui;
 
 /*
-    This is run once when the game starts.
+    This function is called once before `setup()`
+    This function will be used to preload audio once I add audio
+
+    This function is called by p5.js
+*/
+
+function preload() {}
+
+/*
+    This is run once before the game starts.
     I use this function to get data from the server and to 
     setup other varibles and classes that will be used later.
 
