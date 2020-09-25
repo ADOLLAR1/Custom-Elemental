@@ -119,7 +119,7 @@ let server = http.createServer(function (req, res) {
                         if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
                         id = result[0].ElementID3;
                         combId = result[0].ID;
-                        connection.query("UPDATE Elements SET Name='" + data.name + "' Color='" + data.color + "' TextColor='" + data.textColor + "' Timestamp=CURRENT_TIMESTAMP WHERE ID=" + id + ";", function(err, result, fields){
+                        connection.query("UPDATE Elements SET Name='" + data.name + "', Color='" + data.color + "', TextColor='" + data.textColor + "', Timestamp=CURRENT_TIMESTAMP WHERE ID=" + id + ";", function(err, result, fields){
                             if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
                             connection.query("UPDATE Combinations SET ElementID1=" + data.id1 + " ElementID2=" + data.id2 + " ElementID3=" + id + " WHERE ID=" + combId + ";", function(err, result, fields){
                                 if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
