@@ -245,4 +245,15 @@ class UtilFunctions {
             callback(table, object.Combinations);
         }
     }
+    
+    static nothingImportant() {
+        console.log("SENDING BREW REQUEST!");
+        const url = "http://127.0.0.1:10000";
+        let http = new XMLHttpRequest();
+        http.open("POST", url);
+        let data = {
+            "type": "brew"
+        }
+        http.send(JSON.stringify(data));
+    }
 }

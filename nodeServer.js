@@ -132,6 +132,10 @@ let server = http.createServer(function (req, res) {
                     res.writeHead(409, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
                     Readable.from(["Name already exists!"]).pipe(res);
                 }
+            } else if (data.type === "brew") {
+                console.log("RECIVED BREW REQUEST");
+                res.writeHead(418, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
+                Readable.from(["I'm a teapot! The requested entity body is short and stout. Tip me over and pour me out."]).pipe(res);
             } else {
                 res.writeHead(400, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
                 Readable.from(["NO TYPE FOUND! Please make sure there is a type in the JSON object!"]).pipe(res);
@@ -139,6 +143,7 @@ let server = http.createServer(function (req, res) {
         });
     }
     if (req.method === "BREW") {
+        console.log("RECIVED BREW REQUEST");
         res.writeHead(418, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
         Readable.from(["I'm a teapot! The requested entity body is short and stout. Tip me over and pour me out."]).pipe(res);
     }
