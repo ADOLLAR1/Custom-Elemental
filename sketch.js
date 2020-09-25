@@ -24,6 +24,9 @@ let element1;
 let element2 = false;
 let createGui;
 let voteGui;
+let rainbow;
+let counter = 301;
+let newElement;
 
 /*
     This function is called once before `setup()`
@@ -32,7 +35,9 @@ let voteGui;
     This function is called by p5.js
 */
 
-function preload() {}
+function preload() {
+    rainbow = loadImage('Assets/burst.png');
+}
 
 /*
     This is run once before the game starts.
@@ -45,6 +50,8 @@ function preload() {}
 function setup() {
     console.log("Custom Elemental\nCopyright (C) 2020 Alex Dollar\nGNU General Public Lisense\nChecl license.txt for more info");
     createCanvas(800, 800);
+    angleMode(DEGREES);
+    imageMode(CENTER);
     colors = new colorTypes;
     createGui = new CreateGui;
     voteGui = new VoteGui
@@ -74,6 +81,35 @@ function draw() {
     if (voteGui.visible) { //Draw the Vote GUI only if visible
         voteGui.draw();
     }
+    if (counter < 300) { //Draw Element Creation Effect
+        if (counter < 101) {
+            push();
+            translate(400,400);
+            rotate(counter);
+            image(rainbow, 0, 0, counter*4, counter*4, 0, 0, 1000, 1000);
+            pop();
+            //image(rainbow, 200, 200, 400, 400);
+            newElement.drawAtPosWithSize(createVector((400-(counter)), (400-(counter))), createVector(counter*2, counter*2))
+        } else if (counter < 201) {
+            push();
+            translate(400,400);
+            rotate(counter);
+            image(rainbow, 0, 0, 400, 400, 0, 0, 1000, 1000);
+            pop();
+            newElement.drawAtPosWithSize(createVector(300, 300), createVector(200, 200));
+        } else {
+            let newCounter = 100 - (counter - 200);
+            push();
+            translate(400,400);
+            rotate(counter);
+            image(rainbow, 0, 0, newCounter*4, newCounter*4, 0, 0, 1000, 1000);
+            pop();
+            //image(rainbow, 200, 200, 400, 400);
+            newElement.drawAtPosWithSize(createVector((400-(newCounter)), (400-(newCounter))), createVector(newCounter*2, newCounter*2))
+        }
+        counter += 2;
+    }
+
 }
 
 /*
@@ -152,7 +188,8 @@ function mousePressed() {
                     UtilFunctions.attemptCombine(element1, elements[i], combinations, elements, createGui, function(element) {
                         if (element != null) {
                             element.unlocked = 1;
-                            alert("Created " + element.name + " with " + element1.name + " and " + elements[i].name + "!")
+                            newElement = element;
+                            counter = 1;
                         }
                     });
                     element1 = null;
