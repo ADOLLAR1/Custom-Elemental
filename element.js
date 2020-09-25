@@ -65,4 +65,17 @@ class Element {
             text(this.name, pos.x, pos.y, this.size.x, this.size.y);
         }
     }
+    drawAtPosWithSize(pos, size) {
+        if (true) {
+            stroke(this.strokeColor);
+            strokeWeight(2);
+            fill(this.color);
+            rect(pos.x, pos.y, size.x, size.y, 5);
+            fill(this.textColor);
+            noStroke();
+            textAlign(CENTER);
+            textSize(14);
+            text(this.name, pos.x, pos.y, size.x, size.y);
+        }
+    }
 }
