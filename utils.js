@@ -109,7 +109,9 @@ class UtilFunctions {
         let flag = false;
         let found = false;
         let ovr = false;
+        let count = 0;
         combinations.forEach(function(v) {
+            count++;
             if (v.ElementID1 == id1 && v.ElementID2 == id2) {
                 found = true;
                 let element = UtilFunctions.getElementFromID(v.ElementID3, elements);
@@ -142,7 +144,7 @@ class UtilFunctions {
                 flag = true;
             }
         });
-        if ((flag && !found) || ovr) {
+        if ((flag && !found) || ovr || count==0) {
             createGui.selected = 13;
             createGui.name = "";
             createGui.visible = true;
