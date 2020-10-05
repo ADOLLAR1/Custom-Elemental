@@ -27,6 +27,7 @@ let voteGui;
 let rainbow;
 let counter = 301;
 let newElement;
+let glowImg;
 
 /*
     This function is called once before `setup()`
@@ -37,6 +38,7 @@ let newElement;
 
 function preload() {
     rainbow = loadImage('Assets/burst.png');
+    glowImg = loadImage('Assets/glowlarge.png');
 }
 
 /*
@@ -73,6 +75,7 @@ function draw() {
     for(i=0;i<elements.length; i++) { //Draw the elements to the canvas in a grid pattern
         elements[i].setPosition(createVector(Math.floor((j)/950),((j)*50)%950));
         elements[i].draw();
+        elements[i].offset = elements[i].offset + 0.0025;
         if (elements[i].votes>=10&&elements[i].unlocked==1) {j+=1;}
     }
     if (createGui.visible) { //Draw the Create GUI only if visible

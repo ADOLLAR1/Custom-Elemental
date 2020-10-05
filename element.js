@@ -17,7 +17,7 @@
 */
 
 class Element {
-    constructor(id, name, color, textColor, strokeColor, unlocked, votes) {
+    constructor(id, name, color, textColor, strokeColor, unlocked, votes, glow) {
         this.size = createVector(50,50);
         this.id = id;
         this.name = name;
@@ -27,6 +27,9 @@ class Element {
         this.position = createVector(-200,-200);
         this.unlocked = unlocked;
         this.votes = votes;
+        if (glow == null) glow = 0;
+        this.glow = glow;
+        this.offset = 0;
     }
 
     setStroke(c) {
@@ -45,6 +48,11 @@ class Element {
             strokeWeight(2);
             fill(this.color);
             rect(this.position.x, this.position.y, this.size.x, this.size.y, 5);
+            if(this.glow != 0) {
+                imageMode(CORNER);
+                image(glowImg, this.position.x, this.position.y, this.size.x, this.size.y, noise(this.offset)*500, noise(this.offset + 10)*500, this.size.x, this.size.y)
+                imageMode(CENTER);
+            }
             fill(this.textColor);
             noStroke();
             textAlign(CENTER);
@@ -58,6 +66,11 @@ class Element {
             strokeWeight(2);
             fill(this.color);
             rect(pos.x, pos.y, this.size.x, this.size.y, 5);
+            if(this.glow != 0) {
+                imageMode(CORNER);
+                image(glowImg, pos.x, pos.y, this.size.x, this.size.y, noise(this.offset)*500, noise(this.offset + 10)*500, this.size.x, this.size.y)
+                imageMode(CENTER);
+            }
             fill(this.textColor);
             noStroke();
             textAlign(CENTER);
@@ -71,6 +84,11 @@ class Element {
             strokeWeight(2);
             fill(this.color);
             rect(pos.x, pos.y, size.x, size.y, 5);
+            if(this.glow != 0) {
+                imageMode(CORNER);
+                image(glowImg, pos.x, pos.y, size.x, size.y, noise(this.offset)*500, noise(this.offset + 10)*500, size.x, size.y)
+                imageMode(CENTER);
+            }
             fill(this.textColor);
             noStroke();
             textAlign(CENTER);
