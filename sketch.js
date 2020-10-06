@@ -28,6 +28,7 @@ let rainbow;
 let counter = 301;
 let newElement;
 let glowImg;
+let combineSound;
 
 /*
     This function is called once before `setup()`
@@ -39,6 +40,7 @@ let glowImg;
 function preload() {
     rainbow = loadImage('Assets/burst.png');
     glowImg = loadImage('Assets/glowlarge.png');
+    combineSound = createAudio('Assets/combine002.ogg');
 }
 
 /*
@@ -200,6 +202,7 @@ function mousePressed() {
                             element.unlocked = 1;
                             newElement = element;
                             counter = 1;
+                            combineSound.play();
                         }
                     });
                     element1 = null;
