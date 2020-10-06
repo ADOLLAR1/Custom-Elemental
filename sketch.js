@@ -164,12 +164,19 @@ function mousePressed() {
                 return;
             }
         }
+        if (UtilFunctions.isTouching(createVector(400,250), createVector(400,50), createVector(mouseX, mouseY))) {
+            if (createGui.element.glow != 1) {
+                createGui.element.glow = 1;
+            } else {
+                createGui.element.glow = 0;
+            }
+        }
         if (UtilFunctions.isTouching(createVector(400,700), createVector(400,50), createVector(mouseX, mouseY))) {
             createGui.visible = false;
             return;
         }
         if (UtilFunctions.isTouching(createVector(400,750), createVector(400,50), createVector(mouseX, mouseY))) {
-            UtilFunctions.createElement(createGui.name, createGui.selected, colors.colorToInt(colors.getTextColor(colors.intToColor(createGui.selected))), createGui.element1.id, createGui.element2.id, createGui.flag, function() {
+            UtilFunctions.createElement(createGui.name, createGui.selected, colors.colorToInt(colors.getTextColor(colors.intToColor(createGui.selected))), createGui.element.glow, createGui.element1.id, createGui.element2.id, createGui.flag, function() {
                 UtilFunctions.updateElementsTable(elements, function(newElements, newCombinations) {
                     elements = newElements;
                     combinations = newCombinations;

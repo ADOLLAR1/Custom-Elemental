@@ -150,6 +150,9 @@ class UtilFunctions {
             createGui.visible = true;
             createGui.element1 = element1;
             createGui.element2 = element2;
+            if (createGui.element) {
+                createGui.element.glow = 0;
+            }
             if (ovr) createGui.flag = true; else createGui.flag = false;
         }
     }
@@ -159,7 +162,7 @@ class UtilFunctions {
     Will call callback() for additional code to be run
 */
 
-    static createElement(name, color, textColor, id1, id2, flag, callback) {
+    static createElement(name, color, textColor, glow, id1, id2, flag, callback) {
         console.log("SENDING POST REQUEST");
         const url = "http://127.0.0.1:10000";
         let http = new XMLHttpRequest();
@@ -168,6 +171,7 @@ class UtilFunctions {
             "name": name,
             "color": color,
             "textColor": textColor,
+            "glow": glow,
             "id1": id1,
             "id2": id2
         }

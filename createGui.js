@@ -63,10 +63,15 @@ class CreateGui {
                 CreateGui.drawRect([((i%8)*50)+400, (Math.floor(i/8)*50)+150, 50, 50, colors.intToColor(i+1), colors.transparent]);
             }
         }
+        CreateGui.drawRect([400,250,400,50,colors.purple, colors.transparent]);
+        stroke(colors.transparent);
+        fill(colors.black);
+        text("Glow", 400,250,400,50)
         if (name == null) name = "";
         if (this.selected == null) this.selected = 13;
         let color = colors.intToColor(this.selected);
         let textColor = colors.getTextColor(color);
+        this.element.offset = this.element.offset + 0.0025;
         this.element.name = name;
         this.element.color = color;
         this.element.textColor = textColor;
