@@ -30,6 +30,21 @@ class Element {
         if (glow == null) glow = 0;
         this.glow = glow;
         this.offset = 0;
+        this.glowImg = glowImg
+
+        if (this.name === "Magma" || this.name === "Lava") {
+            this.glow = 1;
+            this.glowImg = lavaOverlay;
+        }
+    }
+
+    updateInfo() {
+        if (this.name === "Magma" || this.name === "Lava") {
+            this.glow = 1;
+            this.glowImg = lavaOverlay;
+        } else {
+            this.glowImg = glowImg;
+        }
     }
 
     setStroke(c) {
@@ -50,7 +65,7 @@ class Element {
             rect(this.position.x, this.position.y, this.size.x, this.size.y, 5);
             if(this.glow != 0) {
                 imageMode(CORNER);
-                image(glowImg, this.position.x, this.position.y, this.size.x, this.size.y, noise(this.offset)*500, noise(this.offset + 10)*500, this.size.x, this.size.y)
+                image(this.glowImg, this.position.x, this.position.y, this.size.x, this.size.y, noise(this.offset)*500, noise(this.offset + 10)*500, this.size.x, this.size.y)
                 imageMode(CENTER);
             }
             fill(this.textColor);
@@ -68,7 +83,7 @@ class Element {
             rect(pos.x, pos.y, this.size.x, this.size.y, 5);
             if(this.glow != 0) {
                 imageMode(CORNER);
-                image(glowImg, pos.x, pos.y, this.size.x, this.size.y, noise(this.offset)*500, noise(this.offset + 10)*500, this.size.x, this.size.y)
+                image(this.glowImg, pos.x, pos.y, this.size.x, this.size.y, noise(this.offset)*500, noise(this.offset + 10)*500, this.size.x, this.size.y)
                 imageMode(CENTER);
             }
             fill(this.textColor);
@@ -86,7 +101,7 @@ class Element {
             rect(pos.x, pos.y, size.x, size.y, 5);
             if(this.glow != 0) {
                 imageMode(CORNER);
-                image(glowImg, pos.x, pos.y, size.x, size.y, noise(this.offset)*500, noise(this.offset + 10)*500, size.x, size.y)
+                image(this.glowImg, pos.x, pos.y, size.x, size.y, noise(this.offset)*500, noise(this.offset + 10)*500, size.x, size.y)
                 imageMode(CENTER);
             }
             fill(this.textColor);

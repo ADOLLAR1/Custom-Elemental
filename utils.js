@@ -124,6 +124,7 @@ class UtilFunctions {
                     } else {;
                         voteGui.element = element;
                         voteGui.visible = true;
+                        voteGui.element.updateInfo();
                     }
                 }
             } else if (v.ElementID2 == id1 && v.ElementID1 == id2) {
@@ -138,6 +139,7 @@ class UtilFunctions {
                     } else {;
                         voteGui.element = element;
                         voteGui.visible = true;
+                        voteGui.element.updateInfo();
                     }
                 }
             } else {
@@ -151,7 +153,9 @@ class UtilFunctions {
             createGui.element1 = element1;
             createGui.element2 = element2;
             if (createGui.element) {
+                createGui.element.name = "";
                 createGui.element.glow = 0;
+                createGui.element.updateInfo();
             }
             if (ovr) createGui.flag = true; else createGui.flag = false;
         }

@@ -28,6 +28,7 @@ let rainbow;
 let counter = 301;
 let newElement;
 let glowImg;
+let lavaOverlay;
 let combineSound;
 
 /*
@@ -40,6 +41,7 @@ let combineSound;
 function preload() {
     rainbow = loadImage('Assets/burst.png');
     glowImg = loadImage('Assets/glowlarge.png');
+    lavaOverlay = loadImage('Assets/lavaOverlay.png');
     combineSound = createAudio('Assets/combine002.ogg');
 }
 
@@ -158,11 +160,14 @@ function mousePressed() {
         if (UtilFunctions.isTouching(createVector(400,100), createVector(400,50), createVector(mouseX, mouseY))) {
             let newName = prompt("Enter the new element's name", "");
             createGui.name = newName;
+            createGui.element.name = newName;
+            createGui.element.updateInfo();
             return;
         }
         for (let i = 0; i <= 13; i++) {
             if (UtilFunctions.isTouching(createVector(((i%8)*50)+400, (Math.floor(i/8)*50)+150), createVector(50,50), createVector(mouseX, mouseY))) {
                 createGui.selected = i+1;
+                createGui.element.updateInfo();
                 return;
             }
         }
@@ -172,6 +177,7 @@ function mousePressed() {
             } else {
                 createGui.element.glow = 0;
             }
+            createGui.element.updateInfo();
         }
         if (UtilFunctions.isTouching(createVector(400,700), createVector(400,50), createVector(mouseX, mouseY))) {
             createGui.visible = false;
