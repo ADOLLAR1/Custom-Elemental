@@ -30,7 +30,7 @@ class Element {
         if (glow == null) glow = 0;
         this.glow = glow;
         this.offset = 0;
-        this.glowImg = glowImg
+        this.glowImg = glowImg;
 
         if (this.name === "Magma" || this.name === "Lava") {
             this.glow = 1;
