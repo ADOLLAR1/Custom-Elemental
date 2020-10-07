@@ -35,6 +35,9 @@ class Element {
         if (this.name === "Magma" || this.name === "Lava") {
             this.glow = 1;
             this.glowImg = lavaOverlay;
+        } else if (this.name === "Water" || this.name === "River" || this.name === "Lake" || this.name === "Sea" || this.name === "Stream" || this.name === "Ocean") {
+            this.glow = 1;
+            this.glowImg = waterOverlay; 
         }
     }
 
@@ -42,6 +45,9 @@ class Element {
         if (this.name === "Magma" || this.name === "Lava") {
             this.glow = 1;
             this.glowImg = lavaOverlay;
+        } else if (this.name === "Water" || this.name === "River" || this.name === "Lake" || this.name === "Sea" || this.name === "Stream" || this.name === "Ocean") {
+            this.glow = 1;
+            this.glowImg = waterOverlay; 
         } else {
             this.glowImg = glowImg;
         }

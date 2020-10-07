@@ -29,6 +29,7 @@ let counter = 301;
 let newElement;
 let glowImg;
 let lavaOverlay;
+let waterOverlay;
 let combineSound;
 
 /*
@@ -42,6 +43,7 @@ function preload() {
     rainbow = loadImage('Assets/burst.png');
     glowImg = loadImage('Assets/glowlarge.png');
     lavaOverlay = loadImage('Assets/lavaOverlay.png');
+    waterOverlay = loadImage('Assets/waterOverlay.png');
     combineSound = createAudio('Assets/combine002.ogg');
 }
 
