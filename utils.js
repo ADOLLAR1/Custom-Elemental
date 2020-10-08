@@ -91,7 +91,7 @@ class UtilFunctions {
             let object = JSON.parse(this.responseText);
             let Elements = object.Elements;
             Elements.forEach(function(v) {
-                let element = new Element(v["ID"], v['Name'], colors.intToColor(v["Color"]), colors.intToColor(v["TextColor"]), colors.transparent, v["Unlocked"], v["Votes"], v["Glow"]);
+                let element = new Element(v["ID"], v['Name'], colors.intToColor(v["Color"]), colors.intToColor(v["TextColor"]), transparentColor, v["Unlocked"], v["Votes"], v["Glow"]);
                 table.push(element);
             });
             callback(table, object.Combinations);

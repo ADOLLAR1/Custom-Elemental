@@ -67,6 +67,7 @@ function setup() {
     voteGui = new VoteGui
     UtilFunctions.createConnection();
     UtilFunctions.createElementsTable(function(table, table2) {elements = table; combinations = table2;});
+
     musicInit();
 }
 
@@ -205,7 +206,7 @@ function mousePressed() {
     for(i=0;i<elements.length; i++) {
         if (elements[i].unlocked != 0) {
             if (UtilFunctions.isTouching(elements[i].position, elements[i].size, createVector(mouseX, mouseY))) {
-                elements[i].setStroke(colors.black);
+                elements[i].setStroke(blackColor);
                 if (element1 == null) {
                     element1 = elements[i];
                 } else {
@@ -221,9 +222,9 @@ function mousePressed() {
                 }
             } else {
                 if (elements[i] == element1) {
-                    elements[i].setStroke(colors.green);
+                    elements[i].setStroke(greenColor);
                 } else {
-                    elements[i].setStroke(colors.transparent);
+                    elements[i].setStroke(transparentColor);
                 }
             }
         }

@@ -29,43 +29,43 @@ class CreateGui {
 
     draw() {
         if (this.element == null) {
-            this.element = new Element(0, "NULL", colors.transparent, colors.transparent, colors.transparent, false, 0);
+            this.element = new Element(0, "NULL", transparentColor, transparentColor, transparentColor, false, 0);
         }
         let name = this.name;
         
-        CreateGui.drawRect([400,0,400,800,colors.black,colors.transparent]);
-        fill(colors.white);
+        CreateGui.drawRect([400,0,400,800,blackColor,transparentColor]);
+        fill(whiteColor);
         textAlign(CENTER);
         textSize(32);
         text("Create Element", 400,0,400,50);
         text("+", 400, 50, 400, 50);
         textSize(12);
-        this.element1.setStroke(colors.transparent);
-        this.element2.setStroke(colors.transparent);
+        this.element1.setStroke(transparentColor);
+        this.element2.setStroke(transparentColor);
         this.element1.drawAtPos(createVector(400,50));
         this.element2.drawAtPos(createVector(750,50));
         textSize(32);
-        CreateGui.drawRect([400,100,400,50,colors.gray, colors.transparent]);
+        CreateGui.drawRect([400,100,400,50,grayColor, transparentColor]);
         if (name == "" || name == null) {
-            stroke(colors.transparent);
-            fill(colors.dark_gray);
+            stroke(transparentColor);
+            fill(dark_grayColor);
             text("Name | Click to edit", 400, 100, 400, 50);
         } else {
-            stroke(colors.transparent);
-            fill(colors.black);
+            stroke(transparentColor);
+            fill(blackColor);
             text(name, 400,100,400,50)
         }
 
         for (let i = 0; i <= 13; i++) {
             if (this.selected == i+1) {
-                CreateGui.drawRect([((i%8)*50)+400, (Math.floor(i/8)*50)+150, 50, 50, colors.intToColor(i+1), colors.white]);
+                CreateGui.drawRect([((i%8)*50)+400, (Math.floor(i/8)*50)+150, 50, 50, colors.intToColor(i+1), whiteColor]);
             } else {
-                CreateGui.drawRect([((i%8)*50)+400, (Math.floor(i/8)*50)+150, 50, 50, colors.intToColor(i+1), colors.transparent]);
+                CreateGui.drawRect([((i%8)*50)+400, (Math.floor(i/8)*50)+150, 50, 50, colors.intToColor(i+1), transparentColor]);
             }
         }
-        CreateGui.drawRect([400,250,400,50,colors.purple, colors.transparent]);
-        stroke(colors.transparent);
-        fill(colors.black);
+        CreateGui.drawRect([400,250,400,50,purpleColor, transparentColor]);
+        stroke(transparentColor);
+        fill(blackColor);
         text("Glow", 400,250,400,50)
         if (name == null) name = "";
         if (this.selected == null) this.selected = 13;
@@ -77,15 +77,15 @@ class CreateGui {
         this.element.textColor = textColor;
         this.element.drawAtPos(createVector(575, 375));
 
-        CreateGui.drawRect([400,700,400,50, colors.red, colors.transparent]);
+        CreateGui.drawRect([400,700,400,50, redColor, transparentColor]);
         textSize(32);
-        fill(colors.black);
+        fill(blackColor);
         textAlign(CENTER);
         text("CANCEL", 400,700,400,50);
 
-        CreateGui.drawRect([400,750,400,50, colors.green, colors.transparent]);
+        CreateGui.drawRect([400,750,400,50, greenColor, transparentColor]);
         textSize(32);
-        fill(colors.black);
+        fill(blackColor);
         textAlign(CENTER);
         text("CREATE", 400,750,400,50);
 
