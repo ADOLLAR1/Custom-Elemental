@@ -195,7 +195,7 @@ class UtilFunctions {
     }
 
 /*
-    This function is used to vot for an element server-side in the database
+    This function is used to vote for an element server-side in the database
     Will call callback for adsitional code to be run
 */ 
 
