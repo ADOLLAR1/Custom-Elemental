@@ -58,9 +58,9 @@ class CreateGui {
 
         for (let i = 0; i <= 13; i++) {
             if (this.selected == i+1) {
-                CreateGui.drawRect([((i%8)*50)+400, (Math.floor(i/8)*50)+150, 50, 50, colors.intToColor(i+1), whiteColor]);
+                CreateGui.drawRect([((i%8)*50)+400, (Math.floor(i/8)*50)+150, 50, 50, intToColor(i+1), whiteColor]);
             } else {
-                CreateGui.drawRect([((i%8)*50)+400, (Math.floor(i/8)*50)+150, 50, 50, colors.intToColor(i+1), transparentColor]);
+                CreateGui.drawRect([((i%8)*50)+400, (Math.floor(i/8)*50)+150, 50, 50, intToColor(i+1), transparentColor]);
             }
         }
         CreateGui.drawRect([400,250,400,50,purpleColor, transparentColor]);
@@ -69,8 +69,8 @@ class CreateGui {
         text("Glow", 400,250,400,50)
         if (name == null) name = "";
         if (this.selected == null) this.selected = 13;
-        let color = colors.intToColor(this.selected);
-        let textColor = colors.getTextColor(color);
+        let color = intToColor(this.selected);
+        let textColor = getTextColor(color);
         this.element.offset = this.element.offset + 0.0025;
         this.element.name = name;
         this.element.color = color;

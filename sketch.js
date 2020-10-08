@@ -16,7 +16,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-let colors;
 let utils;
 let elements = [];
 let combinations = [];
@@ -62,7 +61,6 @@ function setup() {
     createCanvas(800, 800);
     angleMode(DEGREES);
     imageMode(CENTER);
-    colors = new colorTypes;
     createGui = new CreateGui;
     voteGui = new VoteGui
     UtilFunctions.createConnection();
@@ -191,7 +189,7 @@ function mousePressed() {
             return;
         }
         if (UtilFunctions.isTouching(createVector(400,750), createVector(400,50), createVector(mouseX, mouseY))) {
-            UtilFunctions.createElement(createGui.name, createGui.selected, colors.colorToInt(colors.getTextColor(colors.intToColor(createGui.selected))), createGui.element.glow, createGui.element1.id, createGui.element2.id, createGui.flag, function() {
+            UtilFunctions.createElement(createGui.name, createGui.selected, colorToInt(getTextColor(intToColor(createGui.selected))), createGui.element.glow, createGui.element1.id, createGui.element2.id, createGui.flag, function() {
                 UtilFunctions.updateElementsTable(elements, function(newElements, newCombinations) {
                     elements = newElements;
                     combinations = newCombinations;
