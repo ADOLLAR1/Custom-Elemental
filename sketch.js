@@ -45,6 +45,8 @@ function preload() {
     lavaOverlay = loadImage('Assets/lavaOverlay.png');
     waterOverlay = loadImage('Assets/waterOverlay.png');
     combineSound = createAudio('Assets/combine002.ogg');
+
+    musicPreInit();
 }
 
 /*
@@ -65,6 +67,7 @@ function setup() {
     voteGui = new VoteGui
     UtilFunctions.createConnection();
     UtilFunctions.createElementsTable(function(table, table2) {elements = table; combinations = table2;});
+    musicInit();
 }
 
 /*
@@ -119,6 +122,7 @@ function draw() {
         counter += 2;
     }
 
+    musicTick();
 }
 
 /*
