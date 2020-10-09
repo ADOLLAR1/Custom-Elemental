@@ -26,6 +26,7 @@ let voteGui;
 let rainbow;
 let counter = 301;
 let newElement;
+let button;
 let glowImg;
 let lavaOverlay;
 let waterOverlay;
@@ -64,8 +65,8 @@ function setup() {
     createGui = new CreateGui;
     voteGui = new VoteGui
     createElementsTable(function(table, table2) {elements = table; combinations = table2;});
-
-    musicInit();
+    button = createButton("Play Music (Sorry, I can't do autoplay.)");
+    button.mousePressed(musicInit);
 }
 
 /*

@@ -20,13 +20,15 @@ let music = [];
 
 function musicPreInit() {
     music = [
-        createAudio('Assets/music001')
+        createAudio('Assets/music001.ogg'),
+        createAudio('Assets/music002.ogg')
     ];
 }
 
 function musicInit() {
+    button.remove();
     music.forEach(track => {
-        track.onEnded(onTrackEnd);
+        track.onended(onTrackEnd);
     });
     let index = Math.floor(Math.random() * music.length);
     music[index].play();
