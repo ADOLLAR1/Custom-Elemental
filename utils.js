@@ -99,7 +99,7 @@
             count++;
             if (v.ElementID1 == id1 && v.ElementID2 == id2) {
                 found = true;
-                let element = UtilFunctions.getElementFromID(v.ElementID3, elements);
+                let element = getElementFromID(v.ElementID3, elements);
                 if (element.unlocked == 0) {
                     if (element.votes >= 10) {
                         callback(element);
@@ -114,7 +114,7 @@
                 }
             } else if (v.ElementID2 == id1 && v.ElementID1 == id2) {
                 found = true;
-                let element = UtilFunctions.getElementFromID(v.ElementID3, elements);
+                let element = getElementFromID(v.ElementID3, elements);
                 if (element.unlocked == 0) {
                     if (element.votes >= 10) {
                         callback(element);
@@ -226,8 +226,8 @@
             let object = JSON.parse(this.responseText);
             let Elements = object.Elements;
             Elements.forEach(function(v) {
-                if (UtilFunctions.getElementFromID(v.ID, elements)) {
-                    let index = UtilFunctions.getIndexFromID(v.ID, table);
+                if (getElementFromID(v.ID, elements)) {
+                    let index = getIndexFromID(v.ID, table);
                     if (table[index].unlocked == 0) {
                         table[index].unlocked = v.Unlocked;
                         table[index].votes = v.Votes;
