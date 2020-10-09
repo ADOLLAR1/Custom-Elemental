@@ -16,132 +16,175 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-class colorTypes {
-    
-    constructor() {
 
-        //DO NOT OVERWRITE THESE VALUES UNLESS IT IS BY HAND
+const redColor = [255,0,0];
+const orangeColor = [255,127,0];
+const yellowColor = [255,255,0];
+const greenColor = [0,255,0];
+const aquaColor = [0,255,255];
+const blueColor = [0,127,255];
+const indigoColor = [0,0,255];
+const purpleColor = [127,0,255];
+const magentaColor = [255,0,255];
+const blackColor = [0,0,0];
+const whiteColor = [255,255,255];
+const brownColor = [127,63,0];
+const grayColor = [127,127,127];
+const dark_grayColor = [63,63,63];
+const transparentColor = [0,0,0,0];
+let rainbowColor = [255,255,255];
 
-        this.red = [255,0,0];
-        this.orange = [255,127,0];
-        this.yellow = [255,255,0];
-        this.green = [0,255,0];
-        this.aqua = [0,255,255];
-        this.blue = [0,127,255];
-        this.indigo = [0,0,255];
-        this.purple = [127,0,255];
-        this.magenta = [255,0,255];
-        this.black = [0,0,0];
-        this.white = [255,255,255];
-        this.brown = [127,63,0];
-        this.gray = [127,127,127];
-        this.dark_gray = [63,63,63];
-        this.transparent = [0,0,0,0];
+let t = 0;
+
+function intToColor(i) {
+    switch(i) {
+        case 1:
+            return redColor;
+        case 2:
+            return orangeColor;
+        case 3:
+            return yellowColor;
+        case 4:
+            return greenColor;
+        case 5:
+            return aquaColor;
+        case 6:
+            return blueColor;
+        case 7:
+            return indigoColor;
+        case 8:
+            return purpleColor;
+        case 9:
+            return magentaColor;
+        case 10:
+            return blackColor;
+        case 11:
+            return whiteColor;
+        case 12:
+            return brownColor;
+        case 13:
+            return grayColor;
+        case 14:
+            return dark_grayColor;
+        case 15: 
+            return transparentColor;
+        case 16:
+            return rainbowColor;
     }
+}
 
-    intToColor(i) {
-        switch(i) {
-            case 1:
-                return this.red;
-            case 2:
-                return this.orange;
-            case 3:
-                return this.yellow;
-            case 4:
-                return this.green;
-            case 5:
-                return this.aqua;
-            case 6:
-                return this.blue;
-            case 7:
-                return this.indigo;
-            case 8:
-                return this.purple;
-            case 9:
-                return this.magenta;
-            case 10:
-                return this.black;
-            case 11:
-                return this.white;
-            case 12:
-                return this.brown;
-            case 13:
-                return this.gray;
-            case 14:
-                return this.dark_gray;
-            case 15: 
-                return this.transparent;
+function colorToInt(c) {
+    switch(c) {
+        case redColor:
+            return 1;
+        case orangeColor:
+            return 2;
+        case yellowColor:
+            return 3;
+        case greenColor:
+            return 4;
+        case aquaColor:
+            return 5;
+        case blueColor:
+            return 6;
+        case indigoColor:
+            return 7;
+        case purpleColor:
+            return 8;
+        case magentaColor:
+            return 9;
+        case blackColor:
+            return 10;
+        case whiteColor:
+            return 11;
+        case brownColor:
+            return 12;
+        case grayColor:
+            return 13;
+        case dark_grayColor:
+            return 14;
+        case transparentColor:
+            return 15;
+        case rainbowColor:
+            return 16;
+    }
+}
+
+function getTextColor(c) {
+    switch(c) {
+        case redColor:
+            return blackColor;
+        case orangeColor:
+            return blackColor;
+        case yellowColor:
+            return blackColor;
+        case greenColor:
+            return blackColor;
+        case aquaColor:
+            return blackColor;
+        case blueColor:
+            return blackColor;
+        case indigoColor:
+            return whiteColor;
+        case purpleColor:
+            return blackColor;
+        case magentaColor:
+            return blackColor;
+        case blackColor:
+            return whiteColor;
+        case whiteColor:
+            return blackColor;
+        case brownColor:
+            return whiteColor;
+        case grayColor:
+            return blackColor;
+        case dark_grayColor:
+            return whiteColor;
+        case transparentColor:
+            return blackColor;
+        case rainbowColor:
+            return blackColor;
+    }
+}
+
+function updateRainbow() {
+    t=t+0.5;
+    t=t%360;
+    rainbowColor = hslToRgb(t/360, 1, 0.5);
+}
+
+/**
+ * Converts an HSL color value to RGB. Conversion formula
+ * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
+ * Assumes h, s, and l are contained in the set [0, 1] and
+ * returns r, g, and b in the set [0, 255].
+ *
+ * @param   {number}  h       The hue
+ * @param   {number}  s       The saturation
+ * @param   {number}  l       The lightness
+ * @return  {Array}           The RGB representation
+ */
+function hslToRgb(h, s, l){
+    var r, g, b;
+
+    if(s == 0){
+        r = g = b = l; // achromatic
+    }else{
+        var hue2rgb = function hue2rgb(p, q, t){
+            if(t < 0) t += 1;
+            if(t > 1) t -= 1;
+            if(t < 1/6) return p + (q - p) * 6 * t;
+            if(t < 1/2) return q;
+            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
         }
+
+        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
     }
 
-    colorToInt(c) {
-        switch(c) {
-            case this.red:
-                return 1;
-            case this.orange:
-                return 2;
-            case this.yellow:
-                return 3;
-            case this.green:
-                return 4;
-            case this.aqua:
-                return 5;
-            case this.blue:
-                return 6;
-            case this.indigo:
-                return 7;
-            case this.purple:
-                return 8;
-            case this.magenta:
-                return 9;
-            case this.black:
-                return 10;
-            case this.white:
-                return 11;
-            case this.brown:
-                return 12;
-            case this.gray:
-                return 13;
-            case this.dark_gray:
-                return 14;
-            case this.transparent:
-                return 15;
-        }
-    }
-
-    getTextColor(c) {
-        switch(c) {
-            case this.red:
-                return this.black;
-            case this.orange:
-                return this.black;
-            case this.yellow:
-                return this.black;
-            case this.green:
-                return this.black;
-            case this.aqua:
-                return this.black;
-            case this.blue:
-                return this.black;
-            case this.indigo:
-                return this.white;
-            case this.purple:
-                return this.black;
-            case this.magenta:
-                return this.black;
-            case this.black:
-                return this.white;
-            case this.white:
-                return this.black;
-            case this.brown:
-                return this.white;
-            case this.gray:
-                return this.black;
-            case this.dark_gray:
-                return this.white;
-            case this.transparent:
-                return this.black;
-        }
-    }
-
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
