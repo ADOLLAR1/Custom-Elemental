@@ -63,8 +63,7 @@ function setup() {
     imageMode(CENTER);
     createGui = new CreateGui;
     voteGui = new VoteGui
-    UtilFunctions.createConnection();
-    UtilFunctions.createElementsTable(function(table, table2) {elements = table; combinations = table2;});
+    createElementsTable(function(table, table2) {elements = table; combinations = table2;});
 
     musicInit();
 }
@@ -134,9 +133,9 @@ function draw() {
 function mousePressed() {
     //Vote GUI Click
     if (voteGui.visible) {
-        if (UtilFunctions.isTouching(createVector(400,750), createVector(200,50), createVector(mouseX, mouseY))) { //-1
-            UtilFunctions.vote(voteGui.element, false, function() {
-                UtilFunctions.updateElementsTable(elements, function(newElements, newCombinaions) {
+        if (isTouching(createVector(400,750), createVector(200,50), createVector(mouseX, mouseY))) { //-1
+            vote(voteGui.element, false, function() {
+                updateElementsTable(elements, function(newElements, newCombinaions) {
                     elements = newElements;
                     combinations = newCombinations;
                 });
@@ -144,9 +143,9 @@ function mousePressed() {
             voteGui.visible = false;
             return;
         }
-        if (UtilFunctions.isTouching(createVector(600,750), createVector(200,50), createVector(mouseX, mouseY))) { //+1
-            UtilFunctions.vote(voteGui.element, true, function() {
-                UtilFunctions.updateElementsTable(elements, function(newElements, newCombinations) {
+        if (isTouching(createVector(600,750), createVector(200,50), createVector(mouseX, mouseY))) { //+1
+            vote(voteGui.element, true, function() {
+                updateElementsTable(elements, function(newElements, newCombinations) {
                     elements = newElements;
                     combinations = newCombinations;
                 });
@@ -154,7 +153,7 @@ function mousePressed() {
             voteGui.visible = false;
             return;
         }
-        if (UtilFunctions.isTouching(createVector(400,700), createVector(400,50), createVector(mouseX, mouseY))) {
+        if (isTouching(createVector(400,700), createVector(400,50), createVector(mouseX, mouseY))) {
             voteGui.visible = false;
             return;
         }
@@ -162,7 +161,7 @@ function mousePressed() {
     }
     //Create GUI Click
     if (createGui.visible) {
-        if (UtilFunctions.isTouching(createVector(400,100), createVector(400,50), createVector(mouseX, mouseY))) {
+        if (isTouching(createVector(400,100), createVector(400,50), createVector(mouseX, mouseY))) {
             let newName = prompt("Enter the new element's name", "");
             createGui.name = newName;
             createGui.element.name = newName;
@@ -170,13 +169,13 @@ function mousePressed() {
             return;
         }
         for (let i = 0; i <= 13; i++) {
-            if (UtilFunctions.isTouching(createVector(((i%8)*50)+400, (Math.floor(i/8)*50)+150), createVector(50,50), createVector(mouseX, mouseY))) {
+            if (isTouching(createVector(((i%8)*50)+400, (Math.floor(i/8)*50)+150), createVector(50,50), createVector(mouseX, mouseY))) {
                 createGui.selected = i+1;
                 createGui.element.updateInfo();
                 return;
             }
         }
-        if (UtilFunctions.isTouching(createVector(400,250), createVector(400,50), createVector(mouseX, mouseY))) {
+        if (isTouching(createVector(400,250), createVector(400,50), createVector(mouseX, mouseY))) {
             if (createGui.element.glow != 1) {
                 createGui.element.glow = 1;
             } else {
@@ -184,13 +183,13 @@ function mousePressed() {
             }
             createGui.element.updateInfo();
         }
-        if (UtilFunctions.isTouching(createVector(400,700), createVector(400,50), createVector(mouseX, mouseY))) {
+        if (isTouching(createVector(400,700), createVector(400,50), createVector(mouseX, mouseY))) {
             createGui.visible = false;
             return;
         }
-        if (UtilFunctions.isTouching(createVector(400,750), createVector(400,50), createVector(mouseX, mouseY))) {
-            UtilFunctions.createElement(createGui.name, createGui.selected, colorToInt(getTextColor(intToColor(createGui.selected))), createGui.element.glow, createGui.element1.id, createGui.element2.id, createGui.flag, function() {
-                UtilFunctions.updateElementsTable(elements, function(newElements, newCombinations) {
+        if (isTouching(createVector(400,750), createVector(400,50), createVector(mouseX, mouseY))) {
+            createElement(createGui.name, createGui.selected, colorToInt(getTextColor(intToColor(createGui.selected))), createGui.element.glow, createGui.element1.id, createGui.element2.id, createGui.flag, function() {
+                updateElementsTable(elements, function(newElements, newCombinations) {
                     elements = newElements;
                     combinations = newCombinations;
                 });
@@ -203,12 +202,12 @@ function mousePressed() {
     //Element Click
     for(i=0;i<elements.length; i++) {
         if (elements[i].unlocked != 0) {
-            if (UtilFunctions.isTouching(elements[i].position, elements[i].size, createVector(mouseX, mouseY))) {
+            if (isTouching(elements[i].position, elements[i].size, createVector(mouseX, mouseY))) {
                 elements[i].setStroke(blackColor);
                 if (element1 == null) {
                     element1 = elements[i];
                 } else {
-                    UtilFunctions.attemptCombine(element1, elements[i], combinations, elements, createGui, function(element) {
+                    attemptCombine(element1, elements[i], combinations, elements, createGui, function(element) {
                         if (element != null) {
                             element.unlocked = 1;
                             newElement = element;
