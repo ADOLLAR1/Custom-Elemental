@@ -151,7 +151,7 @@
     Will call callback() for additional code to be run
 */
 
-    function createElement(name, color, textColor, glow, id1, id2, flag, callback) {
+    function createGameElement(name, color, textColor, glow, id1, id2, flag, callback) {
         console.log("SENDING POST REQUEST");
         const url = "http://127.0.0.1:10000";
         let http = new XMLHttpRequest();
