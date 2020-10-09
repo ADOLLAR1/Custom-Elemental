@@ -1,6 +1,7 @@
 [Project Version]
-    Beta 1.4.0
+    Beta 1.5.0
 [colors.js]
+    release 2.0.0
 [createGui.js]
     Release 1.1.0
 [element.js]
@@ -8,12 +9,12 @@
 [index.html]
     Release 1.0.0
 [nodeServer.js]
-    Beta 1.1.1
+    Release 1.0.0
 [sketch.js]
-    Beta 1.6.0
+    Release 1.0.0
 [utils.js]
-    Beta 1.2.0
+    Release 1.0.0
 [voteGui.js]
     Release 1.0.0
 [musicHandler.js]
-    Beta 1.0.0
+    Beta 1.0.1
