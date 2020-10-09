@@ -16,16 +16,11 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-class UtilFunctions {
-    constructor() {
-        let Http;
-    }
-
 /*
     This function is used to check if a point is inside of a box
 */
 
-    static isTouching(position, scale, position2) {
+    function isTouching(position, scale, position2) {
         if (
             position2.x <= position.x + scale.x &&
             position2.x >= position.x &&
@@ -38,7 +33,7 @@ class UtilFunctions {
     This function is used to get the element from an id contained in an element array
 */
 
-    static getElementFromID(id, elements) {
+    function getElementFromID(id, elements) {
         for (let i=0; i<elements.length; i++) {
             if (elements[i].id == id) return elements[i];
         }
@@ -49,21 +44,11 @@ class UtilFunctions {
     This function is used to get the element array index from an element id in an element array
 */
 
-    static getIndexFromID(id, elements) {
+    function getIndexFromID(id, elements) {
         for (let i=0; i<elements.length; i++) {
             if (elements[i].id == id) return i;
         }
         return null;
-    }
-
-/*
-    This function is used to initilize the XMLHttpRequest connection
-    This function must be called before any functions using an http request can be called
-*/
-
-    static createConnection() {
-        console.log("CREATING CONNECTION TO SERVER")
-        this.Http = new XMLHttpRequest();
     }
 
 /*
@@ -72,7 +57,7 @@ class UtilFunctions {
     This function has a callback so you can set your arrays to what this function returns and for any further code
 */
 
-    static createElementsTable(callback) { //MAY CAUSE LAG
+    function createElementsTable(callback) { //MAY CAUSE LAG
         console.log("SENDING GET REQUEST");
         const url = "http://127.0.0.1:10000";
         let table = [];
@@ -103,7 +88,7 @@ class UtilFunctions {
     If successful will call callback() with the element to unlock()
 */
 
-    static attemptCombine(element1, element2, combinations, elements, createGui, callback) {
+    function attemptCombine(element1, element2, combinations, elements, createGui, callback) {
         let id1 = element1.id;
         let id2 = element2.id;
         let flag = false;
@@ -166,7 +151,7 @@ class UtilFunctions {
     Will call callback() for additional code to be run
 */
 
-    static createElement(name, color, textColor, glow, id1, id2, flag, callback) {
+    function createElement(name, color, textColor, glow, id1, id2, flag, callback) {
         console.log("SENDING POST REQUEST");
         const url = "http://127.0.0.1:10000";
         let http = new XMLHttpRequest();
@@ -199,7 +184,7 @@ class UtilFunctions {
     Will call callback for adsitional code to be run
 */ 
 
-    static vote(element, flag, callback) {
+    function vote(element, flag, callback) {
         console.log("SENDING POST REQUEST");
         const url = "http://127.0.0.1:10000";
         let http = new XMLHttpRequest();
@@ -227,7 +212,7 @@ class UtilFunctions {
     This function also regenerates the combination table
 */
 
-    static updateElementsTable(elements, callback) { //May cause lag
+    function updateElementsTable(elements, callback) { //May cause lag
         console.log("SENDING GET REQUEST");
         const url = "http://127.0.0.1:10000";
         let table = elements;
@@ -256,7 +241,7 @@ class UtilFunctions {
         }
     }
     
-    static nothingImportant() {
+    function nothingImportant() {
         console.log("SENDING BREW REQUEST!");
         const url = "http://127.0.0.1:10000";
         let http = new XMLHttpRequest();
@@ -266,4 +251,3 @@ class UtilFunctions {
         }
         http.send(JSON.stringify(data));
     }
-}
