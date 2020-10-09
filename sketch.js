@@ -122,6 +122,7 @@ function draw() {
     }
 
     musicTick();
+    updateRainbow();
 }
 
 /*
@@ -136,7 +137,7 @@ function mousePressed() {
     if (voteGui.visible) {
         if (isTouching(createVector(400,750), createVector(200,50), createVector(mouseX, mouseY))) { //-1
             vote(voteGui.element, false, function() {
-                updateElementsTable(elements, function(newElements, newCombinaions) {
+                updateElementsTable(elements, function(newElements, newCombinations) {
                     elements = newElements;
                     combinations = newCombinations;
                 });
