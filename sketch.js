@@ -190,7 +190,7 @@ function mousePressed() {
             return;
         }
         if (isTouching(createVector(400,750), createVector(400,50), createVector(mouseX, mouseY))) {
-            createElement(createGui.name, createGui.selected, colorToInt(getTextColor(intToColor(createGui.selected))), createGui.element.glow, createGui.element1.id, createGui.element2.id, createGui.flag, function() {
+            createGameElement(createGui.name, createGui.selected, colorToInt(getTextColor(intToColor(createGui.selected))), createGui.element.glow, createGui.element1.id, createGui.element2.id, createGui.flag, function() {
                 updateElementsTable(elements, function(newElements, newCombinations) {
                     elements = newElements;
                     combinations = newCombinations;
