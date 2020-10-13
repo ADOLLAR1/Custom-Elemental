@@ -241,7 +241,7 @@
         }
     }
     
-    function nothingImportant() {
+    function nothingImportant() {//Tell the server to brew some coffee
         console.log("SENDING BREW REQUEST!");
         const url = "http://127.0.0.1:10000";
         let http = new XMLHttpRequest();

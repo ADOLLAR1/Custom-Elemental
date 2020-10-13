@@ -23,23 +23,26 @@ const {Readable} = require("stream");
 
 const votes = 0;
 
-let port = 10000;
+let port = 10000; //Set the listening port here
 
 console.log("Custom Elemental\nCopyright (C) 2020 Alex Dollar\nGNU General Public Lisense\n");
 
 console.log("Starting on port: " + port);
 
-let connection = mysql.createConnection({
+let connection = mysql.createConnection({ //Create the MySQL connection using the provided login data
     host: "localhost",
     user: "user",
     password: "password"
 });
 
 console.log("Created Connection!");
-let server = http.createServer(function (req, res) {
-    if (req.method === "GET") {
+let server = http.createServer(function (req, res) { //Listen for HTTP requests
+    if (req.method === "GET") {//Get Request
         console.log("Recived GET Request");
-        let data = {"Elements": [], "Combinations": []};
+        let data = {"Elements": [], "Combinations": []}; //Define vars
+        /*
+            Query database
+        */
         connection.query("USE ElementsGame;", function(err, result, fields) {if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }});
         connection.query("SELECT * FROM Elements;", function(err, result, fields) {
             if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
@@ -49,25 +52,25 @@ let server = http.createServer(function (req, res) {
             });
             connection.query("SELECT * FROM Combinations;", function(err, result, fields) {
                 if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
-                Object.keys(result).forEach(function(key) {
+                Object.keys(result).forEach(function(key) { //Collect data in a JS object
                     let row = result[key];
                     data.Combinations.push(row);
                     
                 });
                 res.writeHead(200, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
-                Readable.from([JSON.stringify(data)]).pipe(res);
+                Readable.from([JSON.stringify(data)]).pipe(res); //Send back the JS object in JSON string format
             });
         });
     }
-    if (req.method === "POST") {
+    if (req.method === "POST") {//Post request
         console.log("Recived POST Request");
         let body = '';
         req.on('data', chunk => {
-            body += chunk.toString()
+            body += chunk.toString() //Build data
         });
         req.on('end', () => {
             let data = JSON.parse(body);
-            if (data.type === "create") {
+            if (data.type === "create") { //create element
                 connection.query("USE ElementsGame;", function(err, result, fields) {if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }});
                 let count=0;
                 connection.query("SELECT COUNT(Name) AS Count FROM Elements WHERE Name='" + data.name + "';", function(err, result, fields){
@@ -88,7 +91,7 @@ let server = http.createServer(function (req, res) {
                         Readable.from(["Name already exists!"]).pipe(res);
                     }
                 });
-            } else if(data.type === "vote") {
+            } else if(data.type === "vote") {//Vote for element
                 connection.query("USE ElementsGame;", function(err, result, fields) {if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }});
                 let votes = 0;
                 connection.query("SELECT Votes FROM Elements WHERE ID=" + data.id + ";", function(err, result, fields) {
@@ -106,7 +109,7 @@ let server = http.createServer(function (req, res) {
                     }
                 });
 
-            } else if(data.type === "update") {
+            } else if(data.type === "update") {//Recreate Element
                 connection.query("USE ElementsGame;", function(err, result, fields) {if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }});
                 let count=0;
                 connection.query("SELECT COUNT(Name) AS Count FROM Elements WHERE Name='" + data.name + "';", function(err, result, fields){
@@ -133,17 +136,17 @@ let server = http.createServer(function (req, res) {
                     res.writeHead(409, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
                     Readable.from(["Name already exists!"]).pipe(res);
                 }
-            } else if (data.type === "brew") {
+            } else if (data.type === "brew") {//Don't brew coffee here
                 console.log("RECIVED BREW REQUEST");
                 res.writeHead(418, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
                 Readable.from(["I'm a teapot! The requested entity body is short and stout. Tip me over and pour me out."]).pipe(res);
-            } else {
+            } else {//No type found
                 res.writeHead(400, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
                 Readable.from(["NO TYPE FOUND! Please make sure there is a type in the JSON object!"]).pipe(res);
             }
         });
     }
-    if (req.method === "BREW") {
+    if (req.method === "BREW") {//What did I tell you about brewing coffee here
         console.log("RECIVED BREW REQUEST");
         res.writeHead(418, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
         Readable.from(["I'm a teapot! The requested entity body is short and stout. Tip me over and pour me out."]).pipe(res);

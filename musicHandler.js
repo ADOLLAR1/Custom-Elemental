@@ -18,12 +18,19 @@
 
 let music = [];
 
+/*
+    Load music files here. Also create the music array here
+*/
 function musicPreInit() {
     music = [
         createAudio('Assets/music001.ogg'),
         createAudio('Assets/music002.ogg')
     ];
 }
+
+/*
+    Bind Track Events here and play the first song
+*/
 
 function musicInit() {
     button.remove();
@@ -34,9 +41,18 @@ function musicInit() {
     music[index].play();
 }
 
+/*
+    Called from Draw()
+    So far no uses
+*/
+
 function musicTick() {
 
 }
+
+/*
+    When a track ends play another one.
+*/
 
 function onTrackEnd(track) {
     let index = Math.floor(Math.random() * music.length);

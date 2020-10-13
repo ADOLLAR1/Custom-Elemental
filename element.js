@@ -41,7 +41,7 @@ class Element {
         }
     }
 
-    updateInfo() {
+    updateInfo() {//Update special effect after changing element info
         if (this.name === "Magma" || this.name === "Lava") {
             this.glow = 1;
             this.glowImg = lavaOverlay;
@@ -63,7 +63,7 @@ class Element {
         return;
     }
 
-    draw() {
+    draw() {//Draw the element
         if (this.unlocked !=0 && this.votes >= 10) {
             stroke(this.strokeColor);
             strokeWeight(2);
@@ -81,7 +81,7 @@ class Element {
             text(this.name, this.position.x, this.position.y, this.size.x, this.size.y);
         }
     }
-    drawAtPos(pos) {
+    drawAtPos(pos) {//Draw the element somewhere
         if (true) {
             stroke(this.strokeColor);
             strokeWeight(2);
@@ -99,7 +99,7 @@ class Element {
             text(this.name, pos.x, pos.y, this.size.x, this.size.y);
         }
     }
-    drawAtPosWithSize(pos, size) {
+    drawAtPosWithSize(pos, size) {//Draw the element somewhere at some size
         if (true) {
             stroke(this.strokeColor);
             strokeWeight(2);

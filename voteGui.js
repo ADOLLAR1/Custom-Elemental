@@ -22,7 +22,7 @@ class VoteGui {
         let element;
     }
 
-    draw() {
+    draw() {//Draw the GUI
         if (this.element == null) {
             this.element = new Element(0, "NULL", transparentColor, transparentColor, transparentColor, false, 0);
         }
@@ -58,7 +58,7 @@ class VoteGui {
 
     }
 
-    static drawRect(array) {
+    static drawRect(array) {//Helper method
         stroke(array[5]);
         fill(array[4]);
         rect(array[0], array[1], array[2], array[3], 5);

@@ -36,7 +36,9 @@ let rainbowColor = [255,255,255];
 
 let t = 0;
 
-function intToColor(i) {
+
+
+function intToColor(i) {//Decode color
     switch(i) {
         case 1:
             return redColor;
@@ -73,7 +75,7 @@ function intToColor(i) {
     }
 }
 
-function colorToInt(c) {
+function colorToInt(c) {//Encode color
     switch(c) {
         case redColor:
             return 1;
@@ -110,7 +112,7 @@ function colorToInt(c) {
     }
 }
 
-function getTextColor(c) {
+function getTextColor(c) {//Get text color
     switch(c) {
         case redColor:
             return blackColor;
@@ -147,7 +149,7 @@ function getTextColor(c) {
     }
 }
 
-function updateRainbow() {
+function updateRainbow() {//Helper function for rainbow color
     t=t+0.5;
     t=t%360;
     rainbowColor = hslToRgb(t/360, 1, 0.5);
@@ -164,7 +166,7 @@ function updateRainbow() {
  * @param   {number}  l       The lightness
  * @return  {Array}           The RGB representation
  */
-function hslToRgb(h, s, l){
+function hslToRgb(h, s, l){//Helper function for rainbow color
     var r, g, b;
 
     if(s == 0){
