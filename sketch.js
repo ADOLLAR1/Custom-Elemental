@@ -31,6 +31,8 @@ let glowImg;
 let lavaOverlay;
 let waterOverlay;
 let combineSound;
+let wikiTitle;
+let wikiBody;
 
 /*
     This function is called once before `setup()`
@@ -67,6 +69,8 @@ function setup() {
     createElementsTable(function(table, table2) {elements = table; combinations = table2;});
     button = createButton("Play Music (Sorry, I can't do autoplay.)");
     button.mousePressed(musicInit);
+    wikiTitle = createElement('h3');
+    wikiBody = createElement('p');
 }
 
 /*
@@ -215,6 +219,11 @@ function mousePressed() {
                             newElement = element;
                             counter = 1;
                             combineSound.play();
+                            queryWiki(element.name, function(text, title){
+                                console.log(title);
+                                wikiTitle.html(title);
+                                wikiBody.html(text);
+                            });
                         }
                     });
                     element1 = null;

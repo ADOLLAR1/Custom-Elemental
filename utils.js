@@ -241,6 +241,42 @@
         }
     }
     
+/*
+    Query Wikipedia
+*/
+    function queryWiki(title, callback) {
+        console.log("Sending Wiki Request");
+        let url = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=&origin=*&titles=" + title;
+        let http = new XMLHttpRequest();
+        http.addEventListener("load", reqListener);
+        http.open("GET", url);
+        http.send();
+
+        function reqListener() {
+            console.log("RECIVED!");
+            let object = JSON.parse(this.responseText);
+            let index = [];
+
+            let subObject = object.query.pages;
+            // build the index
+            for (var x in subObject) {
+                index.push(x);
+                let text = subObject[x].extract;
+                callback(text);
+            }
+            
+            // sort the index
+            index.sort(function (a, b) {    
+                return a == b ? 0 : (a > b ? 1 : -1); 
+            });
+
+            let text = subObject[index[0]].extract;
+            let title = subObject[index[0]].title;
+
+            callback(text, title);
+        }
+    }
+
     function nothingImportant() {//Tell the server to brew some coffee
         console.log("SENDING BREW REQUEST!");
         const url = "http://127.0.0.1:10000";
