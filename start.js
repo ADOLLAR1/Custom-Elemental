@@ -22,7 +22,7 @@ const fs = require("fs");
 const port = 8080;
 
 let server = http.createServer(function (req, res) {
-    let stream = fs.createReadStream("index.html");
+    let stream = fs.createReadStream(__dirname + "/index.html");
     stream.on('open', function() {
         stream.pipe(res);
     });
