@@ -17,12 +17,13 @@
 */
 
 let music = [];
+let easter_egg;
 
 /*
     Load music files here. Also create the music array here
 */
 function musicPreInit() {
-    let easter_egg = createAudio('Assets/music006.ogg');
+    easter_egg = createAudio('Assets/music006.ogg');
     music = [
         createAudio('Assets/music001.ogg'),
         createAudio('Assets/music002.ogg'),
