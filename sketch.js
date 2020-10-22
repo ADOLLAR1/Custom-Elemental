@@ -64,8 +64,8 @@ function setup() {
     createCanvas(800, 800);
     angleMode(DEGREES);
     imageMode(CENTER);
-    createGui = new CreateGui;
-    voteGui = new VoteGui
+    createGui = new CreateGui();
+    voteGui = new VoteGui();
     createElementsTable(function(table, table2) {elements = table; combinations = table2;});
     button = createButton("Play Music (Sorry, I can't do autoplay.)");
     button.mousePressed(musicInit);
