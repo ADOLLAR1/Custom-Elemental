@@ -31,6 +31,8 @@ let glowImg;
 let lavaOverlay;
 let waterOverlay;
 let combineSound;
+let wikiTitle;
+let wikiBody;
 
 /*
     This function is called once before `setup()`
@@ -62,11 +64,13 @@ function setup() {
     createCanvas(800, 800);
     angleMode(DEGREES);
     imageMode(CENTER);
-    createGui = new CreateGui;
-    voteGui = new VoteGui
+    createGui = new CreateGui();
+    voteGui = new VoteGui();
     createElementsTable(function(table, table2) {elements = table; combinations = table2;});
     button = createButton("Play Music (Sorry, I can't do autoplay.)");
     button.mousePressed(musicInit);
+    wikiTitle = createElement('h3');
+    wikiBody = createElement('p');
 }
 
 /*
@@ -81,10 +85,10 @@ function draw() {
     background(191);
     let j = 0
     for(i=0;i<elements.length; i++) { //Draw the elements to the canvas in a grid pattern
-        elements[i].setPosition(createVector(Math.floor((j)/950),((j)*50)%950));
+        elements[i].setPosition(createVector(Math.floor((j*50)/800)*50,((j)*50)%800));
         elements[i].draw();
         elements[i].offset = elements[i].offset + 0.0025;
-        if (elements[i].votes>=10&&elements[i].unlocked==1) {j+=1;}
+        if (elements[i].votes>=10&&elements[i].unlocked!=0) {j+=1;}
     }
     if (createGui.visible) { //Draw the Create GUI only if visible
         createGui.draw();
@@ -215,6 +219,11 @@ function mousePressed() {
                             newElement = element;
                             counter = 1;
                             combineSound.play();
+                            queryWiki(element.name, function(text, title){
+                                console.log(title);
+                                wikiTitle.html(title);
+                                wikiBody.html(text);
+                            });
                         }
                     });
                     element1 = null;
