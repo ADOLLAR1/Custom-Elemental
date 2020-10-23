@@ -46,7 +46,7 @@ function musicInit() {
         track.onended(onTrackEnd);
     });
     easter_egg.onended(onTrackEnd);
-    if (Math.floor(Math.random()*10) == 0)
+    if (Math.floor(Math.random()*100) == 0)
     {
         easter_egg.play();
         track = easter_egg;
@@ -75,7 +75,7 @@ function musicTick() {
 function onTrackEnd(_track) {
     if (paused) paused = false;
     track.stop();
-    if (Math.floor(Math.random()*10) == 0)
+    if (Math.floor(Math.random()*100) == 0)
     {
         easter_egg.play();
         track = easter_egg;
@@ -107,13 +107,18 @@ function pauseSong() {
 function newSong() {
     if (paused) paused = false;
     track.stop();
-    if (Math.floor(Math.random()*10) == 0)
-    {
-        easter_egg.play();
-        track = easter_egg;
-    } else {
-        let index = Math.floor(Math.random() * music.length);
-        music[index].play();
-        track = music[index];
-    }
+    let index = Math.floor(Math.random() * music.length);
+    music[index].play();
+    track = music[index];
+}
+
+/*
+    Test Function
+*/
+
+function newSongTEST() {
+    if (paused) paused = false;
+    track.stop();
+    easter_egg.play();
+    track = easter_egg;
 }
