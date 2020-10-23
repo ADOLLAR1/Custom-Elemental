@@ -1,5 +1,5 @@
 [Project Version]
-    Beta 1.6.0
+    Release 1.0.1
 [colors.js]
     release 2.0.0
 [createGui.js]
@@ -9,7 +9,7 @@
 [index.html]
     Release 1.0.0
 [nodeServer.js]
-    Release 1.0.0
+    Release 1.0.1
 [sketch.js]
     Release 1.0.1
 [utils.js]
