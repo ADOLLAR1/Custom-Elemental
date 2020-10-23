@@ -72,7 +72,9 @@ function musicTick() {
     When a track ends play another one.
 */
 
-function onTrackEnd(track) {
+function onTrackEnd(_track) {
+    if (paused) paused = false;
+    track.stop();
     if (Math.floor(Math.random()*10) == 0)
     {
         easter_egg.play();
