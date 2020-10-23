@@ -22,14 +22,14 @@ class VoteGui {
         let element;
     }
 
-    draw() {
+    draw() {//Draw the GUI
         if (this.element == null) {
-            this.element = new Element(0, "NULL", colors.transparent, colors.transparent, colors.transparent, false, 0);
+            this.element = new Element(0, "NULL", transparentColor, transparentColor, transparentColor, false, 0);
         }
         let name = this.name;
         
-        VoteGui.drawRect([400,0,400,800,colors.black,colors.transparent]);
-        fill(colors.white);
+        VoteGui.drawRect([400,0,400,800,blackColor,transparentColor]);
+        fill(whiteColor);
         textAlign(CENTER);
         textSize(32);
         text("Vote", 400,0,400,50);
@@ -38,27 +38,27 @@ class VoteGui {
         textSize(32);
         this.element.drawAtPos(createVector(575, 375));
 
-        CreateGui.drawRect([400,700,400,50, colors.red, colors.transparent]);
+        CreateGui.drawRect([400,700,400,50, redColor, transparentColor]);
         textSize(32);
-        fill(colors.black);
+        fill(blackColor);
         textAlign(CENTER);
         text("CANCEL", 400,700,400,50);
 
-        VoteGui.drawRect([400,750,200,50, colors.red, colors.transparent]);
+        VoteGui.drawRect([400,750,200,50, redColor, transparentColor]);
         textSize(32);
-        fill(colors.black);
+        fill(blackColor);
         textAlign(CENTER);
         text("-1", 400,750,200,50);
 
-        VoteGui.drawRect([600,750,200,50, colors.green, colors.transparent]);
+        VoteGui.drawRect([600,750,200,50, greenColor, transparentColor]);
         textSize(32);
-        fill(colors.black);
+        fill(blackColor);
         textAlign(CENTER);
         text("+1", 600,750,200,50);
 
     }
 
-    static drawRect(array) {
+    static drawRect(array) {//Helper method
         stroke(array[5]);
         fill(array[4]);
         rect(array[0], array[1], array[2], array[3], 5);
