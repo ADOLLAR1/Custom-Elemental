@@ -17,6 +17,12 @@
 */
 
 /*
+    Define Constants
+*/
+
+const URL = "http://127.0.0.1:10000";
+
+/*
     This function is used to check if a point is inside of a box
 */
 
@@ -59,11 +65,10 @@
 
     function createElementsTable(callback) { //MAY CAUSE LAG
         console.log("SENDING GET REQUEST");
-        const url = "http://127.0.0.1:10000";
         let table = [];
         let http = new XMLHttpRequest();
         http.addEventListener("load", reqListener);
-        http.open("GET", url, true);
+        http.open("GET", URL, true);
         http.send();
 
         function reqListener() {
@@ -153,7 +158,6 @@
 
     function createGameElement(name, color, textColor, glow, id1, id2, flag, callback) {
         console.log("SENDING POST REQUEST");
-        const url = "http://127.0.0.1:10000";
         let http = new XMLHttpRequest();
         let data = {
             "type": "create",
@@ -166,7 +170,7 @@
         }
         if (flag) data.type = "update";
         http.addEventListener("load", reqListener);
-        http.open("POST", url, true);
+        http.open("POST", URL, true);
         http.send(JSON.stringify(data));
         function reqListener() {
             if (this.status != 200) {
@@ -186,7 +190,6 @@
 
     function vote(element, flag, callback) {
         console.log("SENDING POST REQUEST");
-        const url = "http://127.0.0.1:10000";
         let http = new XMLHttpRequest();
         let data = {
             "type": "vote",
@@ -194,7 +197,7 @@
             "flag": flag
         }
         http.addEventListener("load", reqListener);
-        http.open("POST", url, true);
+        http.open("POST", URL, true);
         http.send(JSON.stringify(data));
         function reqListener() {
             if (this.status != 200) {
@@ -214,11 +217,10 @@
 
     function updateElementsTable(elements, callback) { //May cause lag
         console.log("SENDING GET REQUEST");
-        const url = "http://127.0.0.1:10000";
         let table = elements;
         let http = new XMLHttpRequest();
         http.addEventListener("load", reqListener);
-        http.open("GET", url, true);
+        http.open("GET", URL, true);
         http.send();
 
         function reqListener() {
@@ -279,9 +281,8 @@
 
     function nothingImportant() {//Tell the server to brew some coffee
         console.log("SENDING BREW REQUEST!");
-        const url = "http://127.0.0.1:10000";
         let http = new XMLHttpRequest();
-        http.open("POST", url);
+        http.open("POST", URL);
         let data = {
             "type": "brew"
         }
