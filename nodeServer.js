@@ -73,23 +73,28 @@ let server = http.createServer(function (req, res) { //Listen for HTTP requests
             if (data.type === "create") { //create element
                 connection.query("USE ElementsGame;", function(err, result, fields) {if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }});
                 let count=0;
+                let count2 = 0;
                 connection.query("SELECT COUNT(Name) AS Count FROM Elements WHERE Name='" + data.name + "';", function(err, result, fields){
                     if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
                     count = result[0].Count;
-                    if (count == 0) {
-                        console.log("Creating");
-                        connection.query("INSERT INTO Elements (Name, Color, TextColor, Votes, Glow) VALUES('" + data.name + "', '" + data.color + "', '" + data.textColor + "', " + votes + ", " + data.glow + ");", function(err, result, fields) {if (err) throw err;});
-                        connection.query("SELECT * FROM Elements WHERE Name='" + data.name + "';", function(err, result, fields) {
-                            if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
-                            let id = result[0].ID;
-                            connection.query("INSERT INTO Combinations (ElementID1, ElementID2, ElementID3) VALUES(" + data.id1 + ", " + data.id2 + ", " + id + ");", function(err, result, fields) {if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }});
-                            res.writeHead(200, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
-                            Readable.from(["OK"]).pipe(res);
-                        });
-                    } else {
-                        res.writeHead(409, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
-                        Readable.from(["Name already exists!"]).pipe(res);
-                    }
+                    connection.query("SELECT COUNT(ID) AS Count FROM Combinations WHERE ElementID1='" + data.id1 + "' AND ElementID2='" + data.id2 + "' OR ElementID2='" + data.id1 + "' AND ElementID1='" + data.id2 + "';", function(err, result, fields){
+                        if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
+                        count2 = result[0].Count;
+                        if (count == 0 && count2 == 0) {
+                            console.log("Creating");
+                            connection.query("INSERT INTO Elements (Name, Color, TextColor, Votes, Glow) VALUES('" + data.name + "', '" + data.color + "', '" + data.textColor + "', " + votes + ", " + data.glow + ");", function(err, result, fields) {if (err) throw err;});
+                            connection.query("SELECT * FROM Elements WHERE Name='" + data.name + "';", function(err, result, fields) {
+                                if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }
+                                let id = result[0].ID;
+                                connection.query("INSERT INTO Combinations (ElementID1, ElementID2, ElementID3) VALUES(" + data.id1 + ", " + data.id2 + ", " + id + ");", function(err, result, fields) {if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }});
+                                res.writeHead(200, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
+                                Readable.from(["OK"]).pipe(res);
+                            });
+                        } else {
+                            res.writeHead(409, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"});
+                            Readable.from(["Name already exists!"]).pipe(res);
+                        }
+                    });
                 });
             } else if(data.type === "vote") {//Vote for element
                 connection.query("USE ElementsGame;", function(err, result, fields) {if (err) { res.writeHead(500, { "Content-Type": "text/plain" , "Access-Control-Allow-Origin": "*"}); Readable.from(["Internal server error!"]).pipe(res); throw err; }});
