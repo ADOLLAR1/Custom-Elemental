@@ -27,6 +27,8 @@ let rainbow;
 let counter = 301;
 let newElement;
 let button;
+let pause;
+let next;
 let glowImg;
 let lavaOverlay;
 let waterOverlay;
@@ -69,6 +71,12 @@ function setup() {
     createElementsTable(function(table, table2) {elements = table; combinations = table2;});
     button = createButton("Play Music (Sorry, I can't do autoplay.)");
     button.mousePressed(musicInit);
+    pause = createButton("⏯️");
+    pause.mousePressed(pauseSong);
+    pause.hide();
+    next = createButton("⏭️");
+    next.mousePressed(newSong);
+    next.hide();
     wikiTitle = createElement('h3');
     wikiBody = createElement('p');
 }

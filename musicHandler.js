@@ -18,11 +18,14 @@
 
 let music = [];
 let easter_egg;
+let paused;
+let track;
 
 /*
     Load music files here. Also create the music array here
 */
 function musicPreInit() {
+    paused = false;
     easter_egg = createAudio('Assets/music006.ogg');
     music = [
         createAudio('Assets/music001.ogg'),
@@ -46,10 +49,14 @@ function musicInit() {
     if (Math.floor(Math.random()*10) == 0)
     {
         easter_egg.play();
+        track = easter_egg;
     } else {
         let index = Math.floor(Math.random() * music.length);
         music[index].play();
+        track = music[index];
     }
+    pause.style('display:inline');
+    next.style('display:inline');
 }
 
 /*
@@ -69,8 +76,42 @@ function onTrackEnd(track) {
     if (Math.floor(Math.random()*10) == 0)
     {
         easter_egg.play();
+        track = easter_egg;
     } else {
         let index = Math.floor(Math.random() * music.length);
         music[index].play();
+        track = music[index];
+    }
+}
+
+/*
+    pause
+*/
+
+function pauseSong() {
+    if (paused) {
+        track.play();
+        paused = false;
+    } else {
+        track.pause();
+        paused = true;
+    }
+}
+
+/*
+    new song
+*/
+
+function newSong() {
+    if (paused) paused = false;
+    track.stop();
+    if (Math.floor(Math.random()*10) == 0)
+    {
+        easter_egg.play();
+        track = easter_egg;
+    } else {
+        let index = Math.floor(Math.random() * music.length);
+        music[index].play();
+        track = music[index];
     }
 }
