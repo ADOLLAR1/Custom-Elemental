@@ -43,7 +43,7 @@ function musicInit() {
         track.onended(onTrackEnd);
     });
     easter_egg.onended(onTrackEnd);
-    if (Math.floor(Math.random()*10) == 10)
+    if (Math.floor(Math.random()*10) == 0)
     {
         easter_egg.play();
     } else {
@@ -66,7 +66,7 @@ function musicTick() {
 */
 
 function onTrackEnd(track) {
-    if (Math.floor(Math.random()*10) == 10)
+    if (Math.floor(Math.random()*10) == 0)
     {
         easter_egg.play();
     } else {
